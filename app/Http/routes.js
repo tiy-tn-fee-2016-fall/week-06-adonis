@@ -15,7 +15,10 @@
 | Route.resource('user', 'UserController')
 */
 
+// Load the Adonis Router
 const Route = use('Route');
+// Get the node-fetch package from node_modules
+const fetch = require('node-fetch');
 
 Route.on('/').render('welcome');
 
@@ -26,4 +29,17 @@ Route.get('/uptime', function * (request, response) {
     // process.uptime() gets the seconds since the server started
     uptime: process.uptime(),
   });
+});
+
+Route.get('/netflix', function * (request, response) {
+  // Look at the query param "q" for the search title
+  // or default to "Gossip Girl" if no query parm
+  // is sent
+  const searchTerm = request.input('q') || 'Gossip Girl';
+
+  fetch(`http://netflixroulette.net/api/api.php?title=${searchTerm}`)
+    .then((res) => res.json())
+    .then((data) => {
+      response.send(data);
+    });
 });
