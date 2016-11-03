@@ -37,9 +37,17 @@ Route.get('/netflix', function * (request, response) {
   // is sent
   const searchTerm = request.input('q') || 'Gossip Girl';
 
-  fetch(`http://netflixroulette.net/api/api.php?title=${searchTerm}`)
-    .then((res) => res.json())
-    .then((data) => {
-      response.send(data);
-    });
+  // fetch(`http://netflixroulette.net/api/api.php?title=${searchTerm}`)
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     response.send(data);
+  //   });
+
+  // Wait for fetch to finish and set "netflixResponse" (called "res" in promise chain above)
+  const netflixResponse = yield fetch(`http://netflixroulette.net/api/api.php?title=${searchTerm}`);
+  // Wait for json parsing and set to "netflixData" (called "data" in promise chain above)
+  const netflixData = yield netflixResponse.json();
+  console.log('From yield', netflixData);
+
+  response.send(netflixData);
 });
