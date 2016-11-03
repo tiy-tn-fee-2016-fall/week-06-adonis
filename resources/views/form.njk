@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Form</title>
+  </head>
+  <body>
+    <form action="/form" method="POST">
+      {{ csrfField }}
+      <input type="text" name="street" placeholder="Street">
+      <input type="text" name="city" placeholder="City">
+      <input type="text" name="zip" placeholder="Zip">
+
+      <button>Submit</button>
+    </form>
+  </body>
+</html>

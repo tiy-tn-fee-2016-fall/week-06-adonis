@@ -61,3 +61,14 @@ Route.get('/simpsons', function * (request, response) {
     simpsons: simpsons.filter((character) => character.name !== 'Root'),
   });
 })
+
+Route.get('/form', function * (request, response) {
+  yield response.sendView('form');
+});
+
+Route.post('/form', function * (request, response) {
+  // Get an object of the request info for just "street", "city", and "zip"
+  const inputs = request.only('street', 'city', 'zip');
+
+  response.send(inputs);
+});
