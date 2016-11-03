@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simpsons</title>
+  </head>
+  <body>
+    <h1>Simpsons Family</h1>
+
+    <h2>{{ x }}</h2>
+
+    <ul>
+      {% for character in simpsons %}
+        <li>
+          <p>{{ character.name }}</p>
+
+          {% if character.parent.length %}
+            <ul>
+              <li>Parents</li>
+              {% for parent in character.parent %}
+                <li>{{ parent }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

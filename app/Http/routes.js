@@ -51,3 +51,13 @@ Route.get('/netflix', function * (request, response) {
 
   response.send(netflixData);
 });
+
+Route.get('/simpsons', function * (request, response) {
+  const simpsons = yield fetch('https://raw.githubusercontent.com/pjekel/cbtree/master/store/json/Simpsons.json')
+    .then((r) => r.json());
+
+  yield response.sendView('simpsons', {
+    x: 'Hello from controller',
+    simpsons: simpsons.filter((character) => character.name !== 'Root'),
+  });
+})
